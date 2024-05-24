@@ -1,4 +1,4 @@
-import { OrbitControls } from "@react-three/drei";
+import { Environment, OrbitControls, Sky } from "@react-three/drei";
 import { Adventurer } from "./Adventurer";
 import { useGLTF } from '@react-three/drei'
 import { useControls } from "leva";
@@ -22,10 +22,15 @@ export const Experience = () => {
   return (
     <>
       <OrbitControls />
-      <group position-y={-1}>
+      <Sky />
+      <Environment preset="sunset" />
+      <group position-y={0}>
         <Adventurer animation={animation} nodes={nodes} materials={materials} allAnimations={allAnimations} />
       </group>
-      <ambientLight intensity={1} />
+      <mesh scale={5} rotation-x={-Math.PI * 0.5}>
+        <planeGeometry />
+        <meshStandardMaterial color="white" />
+      </mesh>
     </>
   );
 };
